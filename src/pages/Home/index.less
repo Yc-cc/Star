@@ -1,0 +1,258 @@
+@import '../../style/common.less';
+.pages{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    .welcome{
+        display: block;
+        position: relative;
+        padding-top: 20vh;
+        > .title {
+            &::before {
+                content: '';
+                display: block;
+                margin: auto;
+                width: 80px;
+                height: 80px;
+                background: url(../../common/images/xingyue.png) center center / 64px 64px no-repeat;
+            }
+            span,
+            em {
+                display: block;
+                font-size: 1.1rem;
+                color: @primary;
+                text-align: center;
+            }
+
+            em {
+                font-style: normal;
+                font-size: .7rem;
+                margin-top: 15px;
+            }
+        }
+        .van-circle {
+            display: block;
+            position: absolute;
+            top: .8rem;
+            right: .8rem;
+            width: 50px;
+            height: 50px;
+        }
+    }
+    > .right-info {
+        display: block;
+        position: absolute;
+        width: 100%;
+        bottom: 1rem;
+        text-align: center;
+        font-size: .6rem;
+        color: @gray;
+    }
+}
+.body{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.header{
+    width: 100%;
+    background-color: rgba(233, 233, 33, 0.911);
+    border-bottom: 1px solid rgba(233, 233, 33, 0.911);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    .mess{
+        // width: 50px;
+        background-color: rgba(233, 233, 33, 0.911);
+        text-align: center;
+        em{
+            display: block;
+            font-weight: 600;
+        }
+        .temperat{
+            font-size: 12px;
+            color: black;
+            font-weight: normal;
+        }
+    }
+    .tool{
+        width: 80px;
+        text-align: center;
+        background-color: rgba(233, 233, 33, 0.911);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        .say{
+            width: 32px;
+            height: 32px;
+            background: url(../../common/images/voice.png) center center / 32px 32px no-repeat;
+        }
+        .add{
+            width: 32px;
+            height: 32px;
+            background: url(../../common/images/add.png) center center / 32px 32px no-repeat;
+        }
+    }
+    .search{
+        padding: 0 10px;
+        flex: 1;
+        /deep/.van-cell{
+            border-radius: 25%;
+        }
+    }
+}
+
+/deep/.mainBox{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    .toolBox{
+        margin-top: 0;
+        height: 80px;
+        width: 100%;
+        background-color: rgba(233, 233, 33, 0.911);
+        padding: 5px 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        justify-content: space-around;
+        .boxItem{
+            width: 100px;
+            height: 60px;
+            background-color: rgba(233, 233, 33, 0.911);
+            margin: 0 2px;
+            font-size: 14px;
+            text-align: center;
+            font-weight: normal;
+            color: gray;
+            .simg{
+                width: 32px;
+                height: 32px;
+                margin: auto;
+                background: url(../../common/images/sao.png) center center / 32px 32px no-repeat;
+            }
+            .pimg{
+                width: 32px;
+                height: 32px;
+                margin: auto;
+                background: url(../../common/images/pay.png) center center / 32px 32px no-repeat;
+            }
+            .himg{
+                width: 32px;
+                height: 32px;
+                margin: auto;
+                background: url(../../common/images/bag.png) center center / 32px 32px no-repeat;
+            }
+            .qimg{
+                width: 32px;
+                height: 32px;
+                margin: auto;
+                background: url(../../common/images/ride.png) center center / 32px 32px no-repeat;
+            }
+            
+        }
+    }
+
+    .mainPart{
+        padding: 10px;
+        .swiper{
+            width: 100%;
+            height: 300px;
+            text-align: center;
+            overflow: hidden;
+            .swiper-slide{
+                // background-color: skyblue;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                .topTool{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+                    align-content: space-around;
+                    width: 100%;
+                    height: 30%;
+                    // background-color: aquamarine;
+                    .toolItem{
+                        width: auto;
+                        height: auto;
+                        font-size: 12px;
+                        .iconfont{
+                            font-size: 40px;
+                        }
+                        .icon-starmeituan{
+                            color: rgba(221, 221, 35, 0.911);
+                        }
+                        .icon-starmeishi{
+                            color: orange;
+                        }
+                        .icon-starjiudian{
+                            color: rgb(80, 80, 235);
+                        }
+                        .icon-starziyuan,.icon-starqinzi{
+                            color: rgb(240, 171, 45);
+                        }
+                        .icon-stardianying{
+                            color: rgb(177, 116, 4);
+                        }
+                        .icon-starqiche,.icon-starxiyu,.icon-starjianshen,.icon-starqichepiao{
+                            color: rgb(86, 196, 240);
+                        }
+                        .icon-starlifa,.icon-starqichedingwei{
+                            color: rgb(59, 59, 228);
+                        }
+                        .icon-starbianlidian,.icon-starjiaoyin,.icon-staryuechi{
+                            color: rgb(250, 184, 62);
+                        }
+                        .icon-staryaoxiang,.icon-starhongbao,.icon-starshouye1{
+                            color: rgb(250, 184, 62);
+                        }
+                        .icon-starhuochepiao,.icon-starzhuangxiu,.icon-starshenghuojiaofei{
+                            color: rgb(76, 176, 216);
+                        }
+                        .icon-staryouxuan,.icon-starjieqian,.icon-starshoujichongzhi{
+                            color: rgb(228, 167, 55);
+                        }
+                        .icon-starguoshu,.icon-starziyuan4,.icon-starshucai_huabanfuben{
+                            color: greenyellow;
+                        }
+                        .icon-starqian,.icon-starwanwu,.icon-starchongdianbao{
+                            color: rgb(247, 232, 29);
+                        }
+                        .icon-staryiliaojigou,.icon-starjingdian{
+                            color: rgb(30, 173, 230);
+                        }
+                        .icon-starpaotuiAPP,.icon-starshenghuofuwu,.icon-starchongwu{
+                            color: rgb(236, 234, 101);
+                        }
+                        .icon-starKTV,.icon-starxuexi,.icon-starshouye,.icon-starjiuba,.icon-staricon-test,.icon-stardiqiu{
+                            color: rgb(209, 56, 209);
+                        }
+                        .icon-startaoxin,.icon-starmeitimeirong,.icon-starmuyingchanpin{
+                            color: rgb(240, 82, 82);
+                        }
+                    }
+                }
+                .cenTool{
+                    width: 100%;
+                    height: 30%;
+                    background-color: pink;
+                }
+                .botTool{
+                    width: 100%;
+                    height: 30%;
+                    background-color: gray;
+                }
+            }
+        }
+    }
+}
+.allmap {
+  width: 100%;
+  height: 50vh;
+  position: relative;
+  z-index: 1;
+}
