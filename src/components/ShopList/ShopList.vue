@@ -193,8 +193,18 @@
 .msite_shop_list{
   width: 100%;
   height: auto;
-}
-    .shop_container{
+  .shop_header{
+    .icon-starshouye1{
+      color: #ffd930 !important;
+      font-size: 22px !important;
+      margin-right: 5px !important;
+    }
+    .shop_header_title{
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  .shop_container{
         margin-bottom: 50px;
         .shop_list{
             width: 100%;
@@ -343,5 +353,7 @@
                 }
             }
         }
-    }
+  }
+}
+    
 </style>
