@@ -18,7 +18,7 @@ const router = new Router({
         {
             path:'/home',
             component:Home,
-            meta:{showFooter:true}
+            
         },
         {path:'/403',component:NotRight},
         {path:'/login',component:Login},

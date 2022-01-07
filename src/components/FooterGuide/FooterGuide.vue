@@ -60,11 +60,11 @@ export default {
         flex-direction: row;
         align-items: center;
         align-content: space-around;
-        margin: 0 10px;
+        // margin: 0 10px;
         font-size: 13px;
         .guide_item{
-            width: 100px;
-            height: 50px;
+            width: 25%;
+            // height: 50px;
             text-align: center;
             span{
               font-size: 12px;

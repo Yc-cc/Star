@@ -271,12 +271,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- 分页器 -->
+                        
                         <div class="swiper-pagination"></div>
                     </div>
+
                     <ShopList/>
 
-                    <!-- <FooterGuide/> -->
+                    <FooterGuide/>
                 </div>
             </div>
         </div>
@@ -284,14 +285,16 @@
     </div>
     
 </template>
+
 <script>
     //引入BMap
     import {BMPGL} from '../Home/baidu'
     import {loadBMap} from '../Home/loadResources'
 
     //引入swiper
-    import Swiper from 'swiper'
-    import "swiper/swiper-bundle.css"
+    // import {Swiper,SwiperSlide} from 'swiper'
+    // import 'swiper/swiper.min.css'
+    // import 'swiper/swiper.min.js'
 
     //引入底部组件
     import FooterGuide from "../../components/FooterGuide/FooterGuide.vue"
@@ -308,9 +311,10 @@
         components:{
             FooterGuide,
             HeaderTop,
-            ShopList
+            ShopList,
+            Swiper,
+            SwiperSlide,
         },
-
         data() {
             const item = {
                 date: '2016-05-02',
@@ -346,7 +350,21 @@
                 currentRate: 100,
                 bottomTitle:false,
                 loopTimer: null,
-                
+                swiperOption: {
+                    pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true // 允许点击小圆点跳转
+                    },
+                    autoplay: {
+                delay: 3000,
+                    disableOnInteraction: false // 手动切换之后继续自动轮播
+                    },
+                    loop: true,
+                    navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                    }
+                },
             }
         },
 
@@ -354,11 +372,13 @@
             //创建一个swiper实例对象，来实现轮播
              var mySwiper = new Swiper('.swiper',{
                 loop:true,//可以循环轮播
-                // 如果需要分页器
                 observer:true,
                 observeParents:true,
+
+                //如果需要分页器
                 pagination: {
-                el: '.swiper-pagination',
+                    el: '.swiper-pagination',
+                    clickable:true,
                 },
             })
         },

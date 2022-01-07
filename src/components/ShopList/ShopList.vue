@@ -190,6 +190,10 @@
 
 <style lang="less" scoped>
 @import "../../common/style/index.less";
+.msite_shop_list{
+  width: 100%;
+  height: auto;
+}
     .shop_container{
         margin-bottom: 50px;
         .shop_list{
