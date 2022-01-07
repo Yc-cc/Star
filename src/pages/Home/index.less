@@ -163,11 +163,13 @@
             height: 300px;
             text-align: center;
             overflow: hidden;
+            position: relative;
+            padding-bottom: 10px;
             .swiper-pagination{
-                bottom: 0;
-                left: 50%;
-                transform: translate(-50%);
-                margin: 0 auto;
+                bottom: 0px;
+                .swiper-pagination-bullet{
+                    background-color: orange !important;
+                }
             }
             .swiper-slide{
                 // background-color: skyblue;

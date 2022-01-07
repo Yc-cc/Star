@@ -292,9 +292,12 @@
     import {loadBMap} from '../Home/loadResources'
 
     //引入swiper
-    // import {Swiper,SwiperSlide} from 'swiper'
-    // import 'swiper/swiper.min.css'
-    // import 'swiper/swiper.min.js'
+    import Swiper from 'swiper'
+    // import 'swiper/dist/css/swiper.min.css'
+    import "../../common/style/swiper/css/swiper.min.css"
+    // import "swiper/css/swiper.min.css"
+    // import "swiper/swiper-bundle.js"
+    
 
     //引入底部组件
     import FooterGuide from "../../components/FooterGuide/FooterGuide.vue"
@@ -312,8 +315,6 @@
             FooterGuide,
             HeaderTop,
             ShopList,
-            Swiper,
-            SwiperSlide,
         },
         data() {
             const item = {
