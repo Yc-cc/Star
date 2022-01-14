@@ -14,12 +14,32 @@ import FooterGuide from "../components/FooterGuide/FooterGuide.vue"
 import {reqFoodCategorys} from "../api"
 
 export default{
+  data() {
+    return {
+      GoodsList:[]
+    }
+  },
     components:{
         FooterGuide
     },
-    async mounted() {
-        const result = await reqFoodCategorys()
-        console.log(result);
+    created() {
+       this.getGoodsList()
+    },
+    methods: {
+      getGoodsList() {
+        reqFoodCategorys({
+      
+        }).then((res) => {
+          if (res.code === 0) {
+            this.GoodsList = res.data
+          } else {
+            this.$message.error(res.message || '没有数据!')
+          }
+        }).catch((err) => {
+          console.log('ERR:', err)
+          this.$message.error('接口返回错误!')
+        })
+      },
     },
 }
 </script>
