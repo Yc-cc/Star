@@ -23,7 +23,10 @@ export default{
         FooterGuide
     },
     created() {
-       this.getGoodsList()
+      //  this.getGoodsList()
+    },
+    mounted() {
+      this.$store.dispatch('getAddress')
     },
     methods: {
       getGoodsList() {

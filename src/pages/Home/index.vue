@@ -34,7 +34,7 @@
                         <div class="add"></div>
                     </div>
                 </div> -->
-        <HeaderTop :title="city">
+        <HeaderTop :title="address.name">
           <div class="mess"
                @click="mapShow"
                slot="left">
@@ -314,6 +314,7 @@ import HeaderTop from "../../components/HeaderTop/HeaderTop.vue"
 //引入商家组件
 import ShopList from "../../components/ShopList/ShopList.vue"
 
+import {mapState,mapActions,mapMutations} from 'vuex'
 
 export default {
 
@@ -323,11 +324,6 @@ export default {
     ShopList,
   },
   data () {
-    const item = {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }
     return {
       province: '',
       city: '',
@@ -337,7 +333,6 @@ export default {
       mymap: null,
       mapBlooean: false,
       posiValue: { longitude: '', latitude: '' },
-      tableData: Array(5).fill(item),
       showLogin: false,
       welText: [
         '正月晴和风气新，纷纷已有醉游人',
@@ -398,8 +393,13 @@ export default {
     this.loop()
   },
 
+  computed:{
+    ...mapState(['address'])
+  },
 
   methods: {
+    ...mapActions(['getAddress']),
+    ...mapMutations(['updateAddress']),
     backLogin () {
       localStorage.removeItem('auto-token')
       this.$router.push('/login')
@@ -419,14 +419,26 @@ export default {
         this.$message.error('接口返回错误!')
       })
     },
+
+    //获取当前经纬度
     getlocation () {
       let that = this
-
       this.$nextTick(function () {
         try {
           const geolocation = new BMap.Geolocation();
           geolocation.getCurrentPosition(function (r) {
             // console.log(r);
+            const localLatitude = r.latitude
+            const localLongitude = r.longitude
+            const localAddress = {'latitude':localLatitude,'longitude':localLongitude}
+            //修改state中的经纬度
+            // that.$store.commit('updateAddress',localAddress)
+            that.updateAddress(localAddress)
+            //调用硅谷获取地址方法
+            // that.$store.dispatch('getCategorys')
+            that.getAddress()
+            //拿到最新地址
+            // that.detailedCity = (that.$store.state.address.address).substring(6)
             that.province = r.address.province
             that.city = r.address.city
             that.searchWeather(r.address.city)
@@ -444,6 +456,7 @@ export default {
       // return posiValue
     },
 
+    //地图绘制
     mapStart (x, y) {
       // 百度地图API功能
       // 传入密钥获取地图回调。
@@ -494,6 +507,7 @@ export default {
       this.briefNew = now.text
     },
 
+    //跳过欢迎页面
     closeWelcome () {
       clearTimeout(this.loopTimer)
       this.showLogin = true
@@ -505,7 +519,8 @@ export default {
           this.bottomTitle = true
       } */
     },
-
+    
+    //倒计时
     loop () {
       this.loopTimer = setTimeout(() => {
         this.currentRate -= 1

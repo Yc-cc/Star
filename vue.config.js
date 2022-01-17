@@ -1,6 +1,6 @@
 module.exports={
-    //关闭lint的检查机制
-    lintOnSave:false,
+    //开启lint的检查机制
+    lintOnSave:true,
     //配置好项目页面
     pages:{
         index:{
