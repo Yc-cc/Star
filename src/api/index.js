@@ -5,6 +5,7 @@
 import ajax from './ajax'
 // const BASE_URL = 'http://localhost:4000'
 const BASE_URL = '/apis'
+const PHONE_URL = '/phoneaddress'
 
 // 1、根据经纬度获取位置详情
 export const reqAddress = (geohash) => ajax(`${BASE_URL}/position/${geohash}`)
@@ -18,6 +19,8 @@ export const reqSearchShop = (geohash, keyword) => ajax(BASE_URL+'/search_shops'
 export const reqPwdLogin = ({name, pwd, captcha}) => ajax(BASE_URL+'/login_pwd', {name, pwd, captcha}, 'POST')
 // 7、发送短信验证码
 export const reqSendCode = (phone) => ajax(BASE_URL+'/sendcode', {phone})
+// 7.1 检验手机号是否存在
+export const reqRightPhone = (phone) => ajax(PHONE_URL,{phone})
 // 8、手机号验证码登陆
 export const reqSmsLogin = (phone, code) => ajax(BASE_URL+'/login_sms', {phone, code}, 'POST')
 // 9、根据会话获取用户信息

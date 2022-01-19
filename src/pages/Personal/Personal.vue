@@ -98,33 +98,42 @@
     </section>
 
     <section class="profile_my_order border-1px">
-      <mt-button
-        type="danger"
+      <van-button
+        type="warning"
         style="width: 100%"
         v-if="userInfo._id"
         @click="logout"
-        >退出登陆</mt-button
+        >退出登陆</van-button
       >
     </section>
     <!-- <FooterGuide /> -->
   </div>
 </template>
 <script>
+import {mapState,mapActions} from 'vuex'
 //引入底部组件
 import FooterGuide from "../../components/FooterGuide/FooterGuide.vue";
+import {Dialog,Toast} from 'vant'
 export default {
+  computed:{
+    ...mapState(['userInfo']),
+    ...mapActions(['resetUserInfo'])
+  },
   components: {
     FooterGuide,
   },
-  data() {
-      return {
-          userInfo:{
-            //   name:'肖宇豪',
-            //   phone:'13568909594',
-              id:10,
-
-          }
-      }
+  methods: {
+    logout(){
+      Dialog.confirm({
+        message: '是否要退出登录！',
+      }).then(() => {
+          this.$store.dispatch('resetUserInfo')
+          this.$toast.success('退出成功')
+        })
+        .catch(() => {
+          this.$toast.fail('退出失败')
+        });
+    }
   },
 };
 </script>

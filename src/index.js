@@ -8,7 +8,10 @@ import store from './store'
 // 全局安装Vant组件
 import Vant from 'vant';
 import 'vant/lib/index.css';
+import axios from 'axios'
 Vue.use(Vant)
+
+Vue.prototype.$axios = axios
 
 // 因为样式加载有一个覆盖的效果，后加载会覆盖先加载
 import './style/index.less'

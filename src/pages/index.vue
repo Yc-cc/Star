@@ -11,8 +11,7 @@
 </template>
 <script>
 import FooterGuide from "../components/FooterGuide/FooterGuide.vue"
-import {reqFoodCategorys} from "../api"
-
+import {mapActions} from 'vuex'
 export default{
   data() {
     return {
@@ -22,27 +21,13 @@ export default{
     components:{
         FooterGuide
     },
-    created() {
-      //  this.getGoodsList()
-    },
     mounted() {
-      this.$store.dispatch('getAddress')
+      this.getAddress()
+      this.getShops()
+      this.gotUserInfo()
     },
     methods: {
-      getGoodsList() {
-        reqFoodCategorys({
-      
-        }).then((res) => {
-          if (res.code === 0) {
-            this.GoodsList = res.data
-          } else {
-            this.$message.error(res.message || '没有数据!')
-          }
-        }).catch((err) => {
-          console.log('ERR:', err)
-          this.$message.error('接口返回错误!')
-        })
-      },
+      ...mapActions(['getAddress','getShops','gotUserInfo'])
     },
 }
 </script>

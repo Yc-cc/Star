@@ -17,23 +17,6 @@
     <div v-show="showLogin"
          class="body">
       <van-sticky>
-        <!-- <div style="height:auto" class="header">
-                    <div class="mess" @click="mapShow">
-                        <em class="city">{{city}}</em>
-                        <em class="temperat">{{briefNew}} {{tmpNew}}℃</em>
-                    </div>
-                    <div class="search">
-                        <van-field class="seaInp"
-                            placeholder="请输入内容"
-                            left-icon="search"
-                            v-model="city">
-                        </van-field>
-                    </div>
-                    <div class="tool">
-                        <div class="say" @click="backLogin"></div>
-                        <div class="add"></div>
-                    </div>
-                </div> -->
         <HeaderTop :title="address.name">
           <div class="mess"
                @click="mapShow"
@@ -41,21 +24,20 @@
             <em class="city">{{city}}</em>
             <em class="temperat">{{briefNew}} {{tmpNew}}℃</em>
           </div>
-          <div class="tool"
-               slot="right">
-            <div class="say"
-                 @click="backLogin"></div>
-            <div class="add"></div>
-          </div>
+          <router-link class="tool" :to="userInfo._id?'personal':'login'" slot="right">
+            <!-- {{userInfo.name || '登录/注册'}} -->
+            <span v-if="!userInfo._id">登录/注册</span>
+            <span v-else><i class="iconfont icon-starwode"></i></span>
+          </router-link>
         </HeaderTop>
       </van-sticky>
       <div class="mainBox">
         <div class="toolBox">
-          <div class="sao boxItem">
-            <div class="simg"></div>
-            <strong>扫一扫</strong>
+          <div class="sao boxItem" v-for="(item,index) in boxItemArray" :key="index">
+            <div :class="item.classname"></div>
+            <strong>{{item.name}}</strong>
           </div>
-          <div class="pay boxItem">
+          <!-- <div class="pay boxItem">
             <div class="pimg"></div>
             <strong>付款码</strong>
           </div>
@@ -66,15 +48,15 @@
           <div class="ride boxItem">
             <div class="qimg"></div>
             <strong>骑车</strong>
-          </div>
+          </div> -->
         </div>
         <div v-if="mapBlooean"
              id="container"
              class="allmap"></div>
         <div class="mainPart">
-          <div class="swiper">
+          <div class="swiper" v-if="swiperArray.length">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
+              <!-- <div class="swiper-slide">
                 <div class="topTool">
                   <div class="toolItem">
                     <div class="iconfont icon-starmeituan"></div>
@@ -277,11 +259,22 @@
                     <span>充电宝</span>
                   </div>
                 </div>
+              </div> -->
+
+              <div class="swiper-slide" v-for="(categorys,index) in swiperArray" :key="index">
+                <div class="topTool" v-for="(categroy,index) in categorys" :key="index">
+                  <a href="javascript:">
+                    <div class="toolItem" v-for="(goods,index) in categroy" :key="index">
+                      <div class="iconfont" :class="goods.icon"></div>
+                      <span>{{goods.name}}</span>
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
-
             <div class="swiper-pagination"></div>
           </div>
+          <img src="./images/msite_back.svg" alt="back" v-else>
 
           <ShopList />
 
@@ -314,10 +307,13 @@ import HeaderTop from "../../components/HeaderTop/HeaderTop.vue"
 //引入商家组件
 import ShopList from "../../components/ShopList/ShopList.vue"
 
-import {mapState,mapActions,mapMutations} from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
 
+  computed: {
+    ...mapState(['userInfo','address','categroys'])
+  },
   components: {
     FooterGuide,
     HeaderTop,
@@ -351,6 +347,230 @@ export default {
       currentRate: 100,
       bottomTitle: false,
       loopTimer: null,
+      boxItemArray:[
+        {
+          name:'扫一扫',
+          classname:'simg'
+        },
+        {
+          name:'付款码',
+          classname:'pimg'
+        },
+        {
+          name:'红包',
+          classname:'himg'
+        },
+        {
+          name:'骑车',
+          classname:'qimg'
+        }
+      ],
+      swiperArray:[
+        [
+          [
+            {
+              name:'外卖',
+              icon:'icon-starmeituan'
+            },
+            {
+              name:'美食',
+              icon:'icon-starmeishi'
+            },
+            {
+              name:'酒店',
+              icon:'icon-starjiudian'
+            },
+            {
+              name:'休闲',
+              icon:'icon-starziyuan'
+            },
+            {
+              name:'电影',
+              icon:'icon-stardianying'
+            }
+          ],
+          [
+            {
+              name:'打车',
+              icon:'icon-starqiche'
+            },
+            {
+              name:'理发',
+              icon:'icon-starlifa'
+            },
+            {
+              name:'便利店',
+              icon:'icon-starbianlidian'
+            },
+            {
+              name:'买药',
+              icon:'icon-staryaoxiang'
+            },
+            {
+              name:'火车票',
+              icon:'icon-starhuochepiao'
+            }
+          ],
+          [
+            {
+              name:'优选',
+              icon:'icon-staryouxuan'
+            },
+            {
+              name:'水果',
+              icon:'icon-starguoshu'
+            },
+            {
+              name:'现金',
+              icon:'icon-starqian'
+            },
+            {
+              name:'医疗',
+              icon:'icon-staryiliaojigou'
+            },
+            {
+              name:'跑腿',
+              icon:'icon-starpaotuiAPP'
+            }
+          ]
+        ],
+        [
+          [
+            {
+              name:'足疗',
+              icon:'icon-starjiaoyin'
+            },
+            {
+              name:'洗浴',
+              icon:'icon-starxiyu'
+            },
+            {
+              name:'KTV',
+              icon:'icon-starKTV'
+            },
+            {
+              name:'签到',
+              icon:'icon-starhongbao'
+            },
+            {
+              name:'结婚',
+              icon:'icon-startaoxin'
+            }
+          ],
+          [
+            {
+              name:'生活',
+              icon:'icon-starmeituan'
+            },
+            {
+              name:'宠物',
+              icon:'icon-starchongwu'
+            },
+            {
+              name:'周边游',
+              icon:'icon-starziyuan4'
+            },
+            {
+              name:'红包',
+              icon:'icon-starshouye1'
+            },
+            {
+              name:'养车',
+              icon:'icon-starqichedingwei'
+            }
+          ],
+          [
+            {
+              name:'美容',
+              icon:'icon-starmeitimeirong'
+            },
+            {
+              name:'学习',
+              icon:'icon-starxuexi'
+            },
+            {
+              name:'健身',
+              icon:'icon-starjianshen'
+            },
+            {
+              name:'景点',
+              icon:'icon-starjingdian'
+            },
+            {
+              name:'商城',
+              icon:'icon-starshouye'
+            }
+          ]
+        ],
+        [
+          [
+            {
+              name:'送菜',
+              icon:'icon-starshucai_huabanfuben'
+            },
+            {
+              name:'电玩',
+              icon:'icon-starwanwu'
+            },
+            {
+              name:'借钱',
+              icon:'icon-starjieqian'
+            },
+            {
+              name:'汽车票',
+              icon:'icon-starqichepiao'
+            },
+            {
+              name:'酒吧',
+              icon:'icon-starjiuba'
+            }
+          ],
+          [
+            {
+              name:'充值',
+              icon:'icon-starshoujichongzhi'
+            },
+            {
+              name:'密室',
+              icon:'icon-staryuechi'
+            },
+            {
+              name:'装修',
+              icon:'icon-starzhuangxiu'
+            },
+            {
+              name:'亲子',
+              icon:'icon-starqinzi'
+            },
+            {
+              name:'有钱',
+              icon:'icon-starqian'
+            }
+          ],
+          [
+            {
+              name:'玩一玩',
+              icon:'icon-staricon-test'
+            },
+            {
+              name:'缴费',
+              icon:'icon-starshenghuojiaofei'
+            },
+            {
+              name:'新奇',
+              icon:'icon-stardiqiu'
+            },
+            {
+              name:'母婴',
+              icon:'icon-starmuyingchanpin'
+            },
+            {
+              name:'充电宝',
+              icon:'icon-starchongdianbao'
+            }
+          ]
+        ]
+      ],
       swiperOption: {
         pagination: {
           el: '.swiper-pagination',
@@ -370,12 +590,13 @@ export default {
   },
 
   mounted () {
+    //获取食品分类列表
+    this.$store.dispatch('getCategorys')
     //创建一个swiper实例对象，来实现轮播
     var mySwiper = new Swiper('.swiper', {
       loop: true,//可以循环轮播
       observer: true,
       observeParents: true,
-
       //如果需要分页器
       pagination: {
         el: '.swiper-pagination',
@@ -392,11 +613,7 @@ export default {
     loadBMap('initBaiduMapScript');
     this.loop()
   },
-
-  computed:{
-    ...mapState(['address'])
-  },
-
+  
   methods: {
     ...mapActions(['getAddress']),
     ...mapMutations(['updateAddress']),
@@ -404,22 +621,6 @@ export default {
       localStorage.removeItem('auto-token')
       this.$router.push('/login')
     },
-    getList() {
-      reqFoodCategorys({
-    
-      }).then((res) => {
-        if (res.code === 0) {
-          this.GoodsList = res.data
-          console.log(this.GoodsList);
-        } else {
-          this.$message.error(res.message || '没有数据!')
-        }
-      }).catch((err) => {
-        console.log('ERR:', err)
-        this.$message.error('接口返回错误!')
-      })
-    },
-
     //获取当前经纬度
     getlocation () {
       let that = this
@@ -430,7 +631,7 @@ export default {
             // console.log(r);
             const localLatitude = r.latitude
             const localLongitude = r.longitude
-            const localAddress = {'latitude':localLatitude,'longitude':localLongitude}
+            const localAddress = { 'latitude': localLatitude, 'longitude': localLongitude }
             //修改state中的经纬度
             // that.$store.commit('updateAddress',localAddress)
             that.updateAddress(localAddress)
@@ -519,7 +720,7 @@ export default {
           this.bottomTitle = true
       } */
     },
-    
+
     //倒计时
     loop () {
       this.loopTimer = setTimeout(() => {
@@ -538,7 +739,7 @@ export default {
         }
       }, 50)
     },
-    
+
   }
 
 }

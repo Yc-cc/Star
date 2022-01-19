@@ -9,8 +9,13 @@ import getters from './getters'
 
 Vue.use(Vuex)
 
-// 引入独立的状态数据模块
-import common from './common'
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions,
+  getters
+})
+
 
 // const store = new Vuex.Store({
 //     // 通过一个插件属性把持久化的插件进行注册
@@ -26,10 +31,3 @@ import common from './common'
 // })
 
 // export default store
-
-export default new Vuex.Store({
-  state,
-  mutations,
-  actions,
-  getters
-})

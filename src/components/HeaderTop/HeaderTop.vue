@@ -64,8 +64,8 @@
     .search{
         padding: 0 10px;
         flex: 1;
-        /deep/.van-cell{
-            border-radius: 25%;
+        .van-cell{
+            border-radius: 20px;
         }
     }
 }
