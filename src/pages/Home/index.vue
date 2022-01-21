@@ -28,6 +28,7 @@
             <!-- {{userInfo.name || '登录/注册'}} -->
             <span v-if="!userInfo._id">登录/注册</span>
             <span v-else><i class="iconfont icon-starwode"></i></span>
+            <div>{{userInfo.name || ''}}</div>
           </router-link>
         </HeaderTop>
       </van-sticky>

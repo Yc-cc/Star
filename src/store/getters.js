@@ -1,11 +1,11 @@
 /**
  * 改变state的getter计算属性的方法
  */
-const getters = {
-  latitude: state => state.latitude,
-  longitude: state => state.longitude,
-  address: state => state.address,
-  latitude: state => state.latitude
+export default {
+  totalCount(state){
+    return state.cartFoods.reduce((preTotal,food) => preTotal + food.count,0)
+  },
+  totalPrice(state){
+    return state.cartFoods.reduce((preTotal,food) => preTotal + food.count*food.price,0)
+  }
 }
-
-export default getters
