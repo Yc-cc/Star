@@ -87,8 +87,8 @@ export default {
   }
   &.star-24{
     .star-item{
-      width: 10px;
-      height: 10px;
+      width: 20px;
+      height: 19px;
       margin-right: 3px;
       background-size: 10px 10px;
       &:last-child{

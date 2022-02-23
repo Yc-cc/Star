@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import {Dialog} from 'vant'
 import {mapState,mapGetters} from 'vuex'
 import BScroll from 'better-scroll'
 import CartControl from '../CartControl/CartControl.vue'
@@ -103,9 +104,17 @@ export default {
       }
     },
     clearCart () {
-      MessageBox.confirm('确定清空购物车吗?').then(action => {
-        this.$store.dispatch('clearCart')
-      }, () => {});
+      // MessageBox.confirm('确定清空购物车吗?').then(action => {
+      //   this.$store.dispatch('clearCart')
+      // }, () => {});
+      Dialog.confirm({
+        title:'标题',
+        message:'确认要清空购物车吗？'
+      }).then(()=>{
+        this.$store.dispatch('clearCartFood')
+      }).catch(()=>{
+        console.log('取消');
+      })
     }
   },
 }

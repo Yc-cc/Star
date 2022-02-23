@@ -11,7 +11,8 @@
   RECEIVE_RATINGS,
   RECEIVE_INFO,
   DECREMENT_FOOD_COUNT,
-  INCREMENT_FOOD_COUNT
+  INCREMENT_FOOD_COUNT,
+  CLEAR_CARTFOOD
 } from './mutation-type'
 
 import {
@@ -86,15 +87,18 @@ export default {
     if(result.code == 0){
       const goods = result.data
       commit(RECEIVE_GOODS,{goods})
+      //数据更新，通知组件
       callback && callback()
     }
   },
   //异步获取商家评价信息
-  async getShopRatings({commit}){
+  async getShopRatings({commit},callback){
     const result = await reqShopRatings()
     if(result.code == 0){
       const ratings = result.data
       commit(RECEIVE_RATINGS,{ratings})
+      //数据更新，通知组件
+      callback && callback()
     }
   },
   //异步获取商家详情
@@ -113,5 +117,10 @@ export default {
     }else{
       commit(DECREMENT_FOOD_COUNT,{food})
     }
+  },
+
+  //同步删除购物车中的数据
+  clearCartFood({commit}){
+    commit(CLEAR_CARTFOOD)
   }
 }
