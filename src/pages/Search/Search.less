@@ -16,6 +16,7 @@
     .search {
         display: flex;
         align-content: space-between;
+        border: 1px solid gray;
         .van-cell{
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -27,4 +28,44 @@
             border: none;
         }
     }
+  .list{
+    .list_container{
+      background-color: #fff;
+      .list_li{
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        border-bottom: 1px solid;
+        .item_left{
+          margin-right: 10px;
+          .restaurant_img{
+            width: 50px;
+            height: 50px;
+            display: block;
+          }
+        }
+        .item_right{
+          font-size: 12px;
+          flex: 1;
+          .item_right_text{
+            p{
+              line-height: 12px;
+              margin-bottom: 6px;
+              margin-top: 0px;
+              &:last_child{
+                margin-bottom: 0px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .search_none{
+    margin: 0 auto;
+    color: #333;
+    background-color: #fff;
+    text-align: center;
+    margin-top: 0.125rem;
+  }
 }

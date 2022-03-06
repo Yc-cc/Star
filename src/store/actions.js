@@ -12,7 +12,8 @@
   RECEIVE_INFO,
   DECREMENT_FOOD_COUNT,
   INCREMENT_FOOD_COUNT,
-  CLEAR_CARTFOOD
+  CLEAR_CARTFOOD,
+  RECEIVE_SEARCH_SHOPS
 } from './mutation-type'
 
 import {
@@ -23,7 +24,8 @@ import {
   reqUserInfo,
   reqShopGoods,
   reqShopRatings,
-  reqShopInfo
+  reqShopInfo,
+  reqSearchShop
 } from '../api/index'
 
 export default {
@@ -122,5 +124,15 @@ export default {
   //同步删除购物车中的数据
   clearCartFood({commit}){
     commit(CLEAR_CARTFOOD)
-  }
+  },
+
+  //异步获取搜索商家列表
+  async getSearchShops({commit,state},searchWord){
+    const geohash = state.latitude + ',' + state.longitude
+    const result = await reqSearchShop(geohash,searchWord)
+    if(result.code == 0){
+      const searchShops = result.data
+      commit(RECEIVE_SEARCH_SHOPS,{searchShops})
+    }
+  },
 }

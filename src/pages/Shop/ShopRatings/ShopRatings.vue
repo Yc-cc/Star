@@ -64,7 +64,9 @@
                 <!-- <span class="item">皮蛋瘦肉粥</span>
                 <span class="item">扁豆焖面</span> -->
               </div>
-              <div class="time">{{rating.rateTime}}</div>
+              <!-- <div class="time">{{rating.rateTime}}</div> -->
+              <!-- 过滤器 -->
+              <div class="time">{{rating.rateTime | date-format}}</div>
             </div>
           </li>
 

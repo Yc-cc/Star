@@ -115,7 +115,7 @@ export default {
 <style lang="less" scoped>
 .shop-info {
   position: absolute;
-  top: 195px;
+  top: 199px;
   bottom: 0;
   left: 0;
   width: 100%;

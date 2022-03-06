@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './pages/index.vue'
+import VueLazyload from 'vue-lazyload'
 import "./common/iconfont/font_3000703_j6vcz41427b/iconfont.css"
 
 import router from './router'
@@ -13,7 +14,15 @@ import axios from 'axios'
 //mock
 import './mock/mockServer'
 
+//loading动图
+import Loading from './common/images/loading.gif'
+//过滤器
+import './filters'
+
 Vue.use(Vant)
+Vue.use(VueLazyload,{
+  Loading
+})
 
 Vue.prototype.$axios = axios
 
