@@ -13,7 +13,8 @@
   DECREMENT_FOOD_COUNT,
   INCREMENT_FOOD_COUNT,
   CLEAR_CARTFOOD,
-  RECEIVE_SEARCH_SHOPS
+  RECEIVE_SEARCH_SHOPS,
+  ADD_ORDER
 } from './mutation-type'
 
 import {
@@ -25,7 +26,8 @@ import {
   reqShopGoods,
   reqShopRatings,
   reqShopInfo,
-  reqSearchShop
+  reqSearchShop,
+  addOrder
 } from '../api/index'
 
 export default {
@@ -135,4 +137,13 @@ export default {
       commit(RECEIVE_SEARCH_SHOPS,{searchShops})
     }
   },
+
+  //增加订单信息
+  async addOrder({commit},data){
+    const result = await addOrder(data)
+    if(result.code == 0){
+      const orderMessage = result.data
+      commit(ADD_ORDER,{orderMessage})
+    }
+  }
 }

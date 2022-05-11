@@ -13,3 +13,4 @@ export const INCREMENT_FOOD_COUNT = 'increment_food_count' // 增加商品的数
 export const DECREMENT_FOOD_COUNT = 'decrement_food_count' // 减少商品的数量
 export const CLEAR_CARTFOOD = 'clear_cartfood' //清空购物车
 export const RECEIVE_SEARCH_SHOPS = 'receive_search_shops' //搜索商家列表
+export const ADD_ORDER = 'add_order' //增加订单

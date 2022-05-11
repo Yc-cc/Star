@@ -13,7 +13,7 @@
           <div class="desc">另需配送费￥{{info.deliveryPrice}}元</div>
         </div>
         <div class="content-right">
-          <div class="pay" :class="payClass">
+          <div class="pay" :class="payClass" @click="addOrder">
             {{payText}}
           </div>
         </div>
@@ -39,6 +39,40 @@
       </transition>
     </div>
     <div class="list-mask" v-show="listShow" @click="toggleShow"></div>
+    <van-overlay :show="orderShow" @click="orderShow = false" />
+    <div class="orderMessage" v-show="orderShow">
+      <van-form ref="myForm" id="myForm" @submit="onSubmit">
+        <van-cell-group inset>
+          <van-field
+            v-model="messageForm.userName"
+            name="用户名"
+            label="用户名"
+            placeholder="用户名"
+            :rules="[{ required: true, message: '请填写用户名' }]"
+          />
+          <van-field
+            v-model="messageForm.userPhone"
+            name="电话号码"
+            label="电话号码"
+            placeholder="电话号码"
+            :rules="[{ required: true, message: '请填写联系电话号码' }]"
+          />
+          <van-field
+            v-model="messageForm.userAddress"
+            name="联系地址"
+            label="联系地址"
+            placeholder="联系地址"
+            :rules="[{ required: true, message: '请填写联系地址' }]"
+          />
+        </van-cell-group>
+        <div style="margin: 16px;">
+          <van-button round block type="primary" native-type="submit">
+            提交
+          </van-button>
+        </div>
+      </van-form>
+
+    </div>
   </div>
 </template>
 
@@ -50,7 +84,15 @@ import CartControl from '../CartControl/CartControl.vue'
 export default {
   data () {
     return {
-      isShow: false
+      isShow: false,
+      orderShow:false,
+      messageForm:{
+        userName:'',
+        userPhone:'',
+        userAddress:'',
+        time:'',
+        totalPrice:''
+      }
     }
   },
   computed:{
@@ -108,14 +150,44 @@ export default {
       //   this.$store.dispatch('clearCart')
       // }, () => {});
       Dialog.confirm({
-        title:'标题',
+        title:'提示',
         message:'确认要清空购物车吗？'
       }).then(()=>{
         this.$store.dispatch('clearCartFood')
       }).catch(()=>{
         console.log('取消');
       })
-    }
+    },
+    //结算
+    addOrder(){
+      // console.log(this.cartFoods);
+      this.orderShow = true
+    },
+    //监听信息表单填写提交
+    onSubmit(){
+      // console.log(this.messageForm);
+      // console.log(this.cartFoods);
+      var myDate = new Date()
+      var myTime = myDate.toLocaleString()
+      this.messageForm.time = myTime
+      this.messageForm.totalPrice = this.totalPrice
+      var data = {
+        orderObj:this.cartFoods,
+        messageObj:this.messageForm
+      }
+      console.log(data);
+      this.$store.dispatch('addOrder',data)
+      this.messageForm.userName = ''
+      this.messageForm.userPhone = ''
+      this.messageForm.userAddress = ''
+      this.messageForm.time = ''
+      this.messageForm.totalPrice = ''
+      this.orderShow = false
+      // document.getElementById("myForm").reset()
+      this.$store.dispatch('clearCartFood')
+      // this.$router.push('/order')
+    },
+    
   },
 }
 </script>
@@ -320,5 +392,17 @@ export default {
       opacity: 0;
       background: rgba(7, 17, 27, 0);
     }
+  }
+  .van-overlay{
+    z-index: 12 !important;
+  }
+  .orderMessage{
+    position: absolute;
+    
+    z-index: 20;
+    background: white;
+    top: 32%;
+    left: 14%;
+    transform: translate(-6%,-50%);
   }
 </style>

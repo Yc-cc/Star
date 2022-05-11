@@ -7,7 +7,7 @@
           </div>
           <div class="shop_container">
             <ul class="shop_list" v-if="shops.length"> 
-              <li class="shop_li border-1px" v-for="(shop,index) in shops" :key="index" @click="$router.push('./shop')">
+              <li class="shop_li border-1px" v-for="(shop,index) in shops" :key="index" @click="turnToShop">
                 <a>
                   <div class="shop_left">
                     <!-- <img class="shop_img" :src="baseImgUrl+shop.image_path"> -->
@@ -203,11 +203,26 @@ export default {
     }
   },
   computed:{
-    ...mapState(['shops'])
+    ...mapState(['userInfo','shops'])
   },
   components:{
     Star
-  }
+  },
+  methods: {
+    turnToShop(){
+      console.log(this.userInfo);
+      if(this.userInfo.phone || this.userInfo.name){
+        this.$router.push('./shop')
+      }else{
+        this.$dialog.confirm({
+            title: '提示',
+            message: `请先进行登录！`,
+          }).then(async () => {
+            this.$router.push('./login')
+          }).catch(() => { })
+      }
+    }
+  },
 }
 </script>
 

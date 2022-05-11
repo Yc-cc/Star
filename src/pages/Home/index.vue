@@ -685,8 +685,12 @@ export default {
     mapShow () {
       // let zuobiao = this.getlocation()
       // console.log(zuobiao.longitude);
-      this.mapStart(parseFloat(this.posiValue.longitude), parseFloat(this.posiValue.latitude))
-      this.mapBlooean = true
+      if(this.mapBlooean){
+        this.mapBlooean = false
+      }else{
+        this.mapBlooean = true
+        this.mapStart(parseFloat(this.posiValue.longitude), parseFloat(this.posiValue.latitude))
+      }
     },
 
     //获取天气方法

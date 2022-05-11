@@ -113,6 +113,15 @@ export default {
       supportShow: false
     }
   },
+  // beforeRouteEnter(to, from, next) {
+  //   console.log(from)
+  //   if (from.path === '/customer/details') {
+  //     next()
+  //   } else {
+  //     sessionStorage.removeItem('customerText')
+  //     next()
+  //   }
+  // },
   computed:{
     ...mapState(['info'])
   },

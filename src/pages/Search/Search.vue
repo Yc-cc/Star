@@ -3,18 +3,19 @@
     <van-sticky>
       搜索
     </van-sticky>
-    <form class="search" @submit.prevent="search">
+    <form class="search">
       <van-field
         class="seaInp"
         placeholder="请输入商家或者商品名称"
         left-icon="search"
         v-model="keyword"
+        @change="search"
       >
       </van-field>
       <van-button round type="info">搜索</van-button>
     </form>
     
-    <section class="list" v-if="!noSearchShops">
+    <section class="list" ref="list" v-if="!noSearchShops">
       <ul class="list_container">
         <!--:to="'/shop?id='+item.id"-->
         <router-link :to="{path:'/shop', query:{id:item.id}}" tag="li"
@@ -40,6 +41,7 @@
 </template>
 <script>
   import {mapState} from 'vuex'
+  import BScroll from '@better-scroll/core'
   export default {
 
     data () {
@@ -62,8 +64,13 @@
         // 进行搜索
         if(keyword) {
           this.$store.dispatch('getSearchShops', keyword)
+        }else{
+          this.noSearchShops = true
         }
       }
+    },
+    mounted () {
+	    this.scroll = new BScroll(this.$refs.list)
     },
 
     watch: {
@@ -73,6 +80,9 @@
           console.log('显示无数据');
         } else {// 有数据
           this.noSearchShops = false
+          this.$nextTick(()=>{
+            this.scroll.refresh();
+          })
         }
       }
     }

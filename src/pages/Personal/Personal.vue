@@ -3,7 +3,7 @@
     <van-sticky> 我的 </van-sticky>
     <section class="profile-number">
       <router-link
-        :to="userInfo._id ? '/userinfo': '/login'"
+        :to="userInfo._id ? '/home': '/login'"
         class="profile-link"
       >
         <div class="profile_image">
